@@ -27,6 +27,7 @@ class Lesson(models.Model):
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
     preview = models.ImageField(upload_to="lessons/", null=True, blank=True, verbose_name="Превью")
     url = models.CharField(max_length=150, null=True, blank=True, verbose_name="Ссылка")
+    course = models.ForeignKey(Course, on_delete=models.SET, null=True, blank=True, verbose_name="Курс")
 
     def __str__(self) -> str:
         return f"{self.name}"
