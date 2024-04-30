@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -45,7 +46,8 @@ INSTALLED_APPS = [
     'users',
     'rest_framework',
     'materials',
-    'django_filters'
+    'django_filters',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -141,9 +143,28 @@ MEDIA_URL = "media/"
 
 NULLABLE = {"null": True, "blank": True}
 
-CASH_PAID = "Наличные"
-CARD_PAID = "Перевод"
+CASH_PAID = "cash"
+CARD_PAID = "card"
 
 PAYMENT_METHOD_CHOICES = {CASH_PAID: "Наличные", CARD_PAID: "Перевод"}
 
-FIXTURES_DATA_PATH = Path(__file__).parent.parent.joinpath("materials", "fixtures", "users_data.json")
+# Настройки JWT-токенов
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+# Настройки срока действия токенов
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+SUPERUSER_EMAIL = os.getenv("SUPERUSER_EMAIL")
+SUPERUSER_PASSWORD = os.getenv("SUPERUSER_PASSWORD")
+SUPERUSER_FIRST_NAME = os.getenv("SUPERUSER_FIRST_NAME")
+SUPERUSER_LAST_NAME = os.getenv("SUPERUSER_LAST_NAME")
