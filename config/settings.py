@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 
     'users',
     'rest_framework',
-    'materials'
+    'materials',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -136,3 +138,12 @@ AUTH_USER_MODEL = "users.User"
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "media/"
+
+NULLABLE = {"null": True, "blank": True}
+
+CASH_PAID = "Наличные"
+CARD_PAID = "Перевод"
+
+PAYMENT_METHOD_CHOICES = {CASH_PAID: "Наличные", CARD_PAID: "Перевод"}
+
+FIXTURES_DATA_PATH = Path(__file__).parent.parent.joinpath("materials", "fixtures", "users_data.json")
