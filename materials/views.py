@@ -2,18 +2,13 @@ from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from materials.models import Course, Lesson
-from materials.serializers import (CourseSerializer, LessonSerializer,
-                                   LessonsInCourseSerializer)
+from materials.serializers import CourseSerializer, LessonSerializer
 from users.permissions import IsModerator, IsOwner
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
-
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return LessonsInCourseSerializer
-        return CourseSerializer
+    serializer_class = CourseSerializer
 
     def perform_create(self, serializer):
         course = serializer.save()
