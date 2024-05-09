@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 
-from materials.models import Course, Lesson, Subscription
+from materials.models import Course, Lesson
 from materials.validators import UrlValidator
 
 
