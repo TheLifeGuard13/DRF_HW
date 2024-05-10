@@ -1,7 +1,16 @@
 import stripe
 from config.settings import STRIPE_API_KEY
+from currency_converter import CurrencyConverter
 
 stripe.api_key = STRIPE_API_KEY
+
+
+def convert_rub_to_usd(amount):
+    """Конвертирует рубли в доллары."""
+    c = CurrencyConverter()
+    result = c.convert(amount, 'RUB', 'USD')
+    print(result)
+    return int(result)
 
 
 def create_stripe_product(product_name):
