@@ -20,6 +20,12 @@ black = "^24.4.2"
 flake8 = "^7.0.0"
 isort = "^5.13.2"
 coverage = "^7.5.1"
+django-cors-headers = "^4.3.1"
+requests = "^2.31.0"
+drf-yasg = "^1.21.7"
+setuptools = "^69.5.1"
+stripe = "^9.5.0"
+forex-python = "^1.8"
 
 
 [build-system]

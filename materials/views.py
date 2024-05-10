@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from materials.models import Course, Lesson, Subscription
 from materials.paginators import MaterialPaginator
 from materials.serializers import CourseSerializer, LessonSerializer
-from users.permissions import IsModerator, IsOwner
+from users.permissions import IsModerator, IsOwner, IsStaff
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -23,9 +23,9 @@ class CourseViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             self.permission_classes = (~IsModerator,)
         elif self.action in ['update', 'retrieve']:
-            self.permission_classes = (IsModerator | IsOwner, )
+            self.permission_classes = (IsModerator | IsOwner | IsStaff, )
         elif self.action == 'destroy':
-            self.permission_classes = (~IsModerator | IsOwner, )
+            self.permission_classes = (~IsModerator | IsOwner | IsStaff, )
         return super().get_permissions()
 
 

@@ -29,11 +29,13 @@ class Payment(models.Model):
     payment_date = models.DateTimeField(**NULLABLE, auto_now_add=True, verbose_name="Дата платежа")
     paid_course = models.ForeignKey(Course, on_delete=models.SET, **NULLABLE, verbose_name="Оплаченный курс")
     paid_lesson = models.ForeignKey(Lesson, on_delete=models.SET, **NULLABLE, verbose_name="Оплаченный урок")
-    payment_amount = models.FloatField(**NULLABLE,)
+    payment_amount = models.PositiveIntegerField(**NULLABLE, verbose_name="Сумма оплаты")
     payment_method = models.CharField(max_length=150, choices=PAYMENT_METHOD_CHOICES, verbose_name="Вариант оплаты")
+    session_id = models.CharField(max_length=255, **NULLABLE, verbose_name="Айди сессии")
+    link = models.URLField(max_length=400, **NULLABLE, verbose_name="Ссылка на сессию")
 
     def __str__(self) -> str:
-        return f"{self.owner}"
+        return f"{self.owner}, {self.paid_course}"
 
     class Meta:
         verbose_name = "платеж"

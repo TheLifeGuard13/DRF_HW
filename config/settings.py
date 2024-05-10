@@ -43,11 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'users',
     'rest_framework',
-    'materials',
     'django_filters',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'corsheaders',
+    'drf_yasg',
+
+    'users',
+    'materials',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -168,3 +172,17 @@ SUPERUSER_EMAIL = os.getenv("SUPERUSER_EMAIL")
 SUPERUSER_PASSWORD = os.getenv("SUPERUSER_PASSWORD")
 SUPERUSER_FIRST_NAME = os.getenv("SUPERUSER_FIRST_NAME")
 SUPERUSER_LAST_NAME = os.getenv("SUPERUSER_LAST_NAME")
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',  # Замените на адрес вашего фронтенд-сервера
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.example.com",  # Замените на адрес вашего фронтенд-сервера
+    'http://localhost:8000',  # и добавьте адрес бэкенд-сервера
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
