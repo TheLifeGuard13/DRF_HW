@@ -13,3 +13,11 @@ class IsOwner(permissions.BasePermission):
         if obj.owner == request.user:
             return True
         return False
+
+
+class IsStaff(permissions.BasePermission):
+    """Проверяет является ли пользователь модератором."""
+    def has_permission(self, request, view):
+        if request.user.is_staff:
+            return True
+        return False

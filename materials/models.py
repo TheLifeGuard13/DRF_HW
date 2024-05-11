@@ -15,9 +15,10 @@ class Course(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE, **NULLABLE, verbose_name="Владелец"
     )
+    price = models.PositiveIntegerField(default="10000", verbose_name="Цена курса")
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.name}, {self.price}"
 
     class Meta:
         verbose_name = "курс"
