@@ -21,7 +21,7 @@ class CourseSerializer(serializers.ModelSerializer):
         return obj.lesson_set.all().count()
 
     def get_is_subscribed(self, obj):
-        request = self.context.get('request')
+        request = self.context.get("request")
         user = None
         if request:
             user = request.user

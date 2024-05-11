@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('materials', '0001_initial'),
+        ("materials", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='lesson',
-            old_name='header',
-            new_name='name',
+            model_name="lesson",
+            old_name="header",
+            new_name="name",
         ),
         migrations.AlterField(
-            model_name='lesson',
-            name='url',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Ссылка'),
+            model_name="lesson",
+            name="url",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Ссылка"),
         ),
     ]

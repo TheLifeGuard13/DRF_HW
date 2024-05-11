@@ -20,12 +20,12 @@ class CourseViewSet(viewsets.ModelViewSet):
         course.save()
 
     def get_permissions(self):
-        if self.action == 'create':
+        if self.action == "create":
             self.permission_classes = (~IsModerator,)
-        elif self.action in ['update', 'retrieve']:
-            self.permission_classes = (IsModerator | IsOwner | IsStaff, )
-        elif self.action == 'destroy':
-            self.permission_classes = (~IsModerator | IsOwner | IsStaff, )
+        elif self.action in ["update", "retrieve"]:
+            self.permission_classes = (IsModerator | IsOwner | IsStaff,)
+        elif self.action == "destroy":
+            self.permission_classes = (~IsModerator | IsOwner | IsStaff,)
         return super().get_permissions()
 
 
@@ -64,11 +64,11 @@ class LessonDestroyAPIView(generics.DestroyAPIView):
 
 class SubscriptionCreateAPIView(generics.CreateAPIView):
     serializer_class = CourseSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
-        course_id = self.request.data.get('course')
+        course_id = self.request.data.get("course")
         course_item = get_object_or_404(Course, pk=course_id)
 
         subs_item = Subscription.objects.filter(subscriber=user, course=course_item)
@@ -76,10 +76,10 @@ class SubscriptionCreateAPIView(generics.CreateAPIView):
         # Если подписка у пользователя на этот курс есть - удаляем ее
         if subs_item.exists():
             subs_item.delete()
-            message = 'подписка удалена'
+            message = "подписка удалена"
         # Если подписки у пользователя на этот курс нет - создаем ее
         else:
             Subscription.objects.create(subscriber=user, course=course_item)
-            message = 'подписка добавлена'
+            message = "подписка добавлена"
         # Возвращаем ответ в API
         return Response({"message": message})

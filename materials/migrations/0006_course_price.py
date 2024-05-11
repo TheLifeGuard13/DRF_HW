@@ -13,8 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="course",
             name="price",
-            field=models.PositiveIntegerField(
-                default="10000", verbose_name="Цена курса"
-            ),
+            field=models.PositiveIntegerField(default="10000", verbose_name="Цена курса"),
         ),
     ]

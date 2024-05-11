@@ -13,22 +13,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="payment",
             name="link",
-            field=models.URLField(
-                blank=True, max_length=400, null=True, verbose_name="Ссылка на сессию"
-            ),
+            field=models.URLField(blank=True, max_length=400, null=True, verbose_name="Ссылка на сессию"),
         ),
         migrations.AddField(
             model_name="payment",
             name="session_id",
-            field=models.CharField(
-                blank=True, max_length=255, null=True, verbose_name="Айди сессии"
-            ),
+            field=models.CharField(blank=True, max_length=255, null=True, verbose_name="Айди сессии"),
         ),
         migrations.AlterField(
             model_name="payment",
             name="payment_amount",
-            field=models.PositiveIntegerField(
-                blank=True, null=True, verbose_name="Сумма оплаты"
-            ),
+            field=models.PositiveIntegerField(blank=True, null=True, verbose_name="Сумма оплаты"),
         ),
     ]
