@@ -7,35 +7,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, verbose_name='Название')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Описание')),
-                ('preview', models.ImageField(blank=True, null=True, upload_to='courses/', verbose_name='Превью')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=150, verbose_name="Название")),
+                ("description", models.TextField(blank=True, null=True, verbose_name="Описание")),
+                ("preview", models.ImageField(blank=True, null=True, upload_to="courses/", verbose_name="Превью")),
             ],
             options={
-                'verbose_name': 'курс',
-                'verbose_name_plural': 'курсы',
+                "verbose_name": "курс",
+                "verbose_name_plural": "курсы",
             },
         ),
         migrations.CreateModel(
-            name='Lesson',
+            name="Lesson",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('header', models.CharField(max_length=150, verbose_name='Название')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Описание')),
-                ('preview', models.ImageField(blank=True, null=True, upload_to='lessons/', verbose_name='Превью')),
-                ('url', models.CharField(max_length=150, verbose_name='Ссылка')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("header", models.CharField(max_length=150, verbose_name="Название")),
+                ("description", models.TextField(blank=True, null=True, verbose_name="Описание")),
+                ("preview", models.ImageField(blank=True, null=True, upload_to="lessons/", verbose_name="Превью")),
+                ("url", models.CharField(max_length=150, verbose_name="Ссылка")),
             ],
             options={
-                'verbose_name': 'урок',
-                'verbose_name_plural': 'уроки',
+                "verbose_name": "урок",
+                "verbose_name_plural": "уроки",
             },
         ),
     ]

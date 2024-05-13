@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 
 from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer
-from users.services import create_stripe_product, create_stripe_price, create_stripe_session, convert_rub_to_usd
+from users.services import convert_rub_to_usd, create_stripe_price, create_stripe_product, create_stripe_session
 
 
 class PaymentCreateAPIView(generics.CreateAPIView):
@@ -28,9 +28,16 @@ class PaymentCreateAPIView(generics.CreateAPIView):
 class PaymentListAPIView(generics.ListAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
-    filterset_fields = ("paid_course", "paid_lesson", "payment_method", )
+    filterset_fields = (
+        "paid_course",
+        "paid_lesson",
+        "payment_method",
+    )
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    ordering_fields = ["payment_date", "payment_amount", ]
+    ordering_fields = [
+        "payment_date",
+        "payment_amount",
+    ]
 
 
 class UserCreateAPIView(generics.CreateAPIView):
