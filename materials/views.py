@@ -29,9 +29,6 @@ class CourseViewSet(viewsets.ModelViewSet):
             self.permission_classes = (~IsModerator | IsOwner | IsStaff,)
         return super().get_permissions()
 
-    # def update(self, request, pk=None, project_pk=None):
-    #     print(request.data['result'])
-
     def partial_update(self, request, *args, **kwargs):
         course_item = get_object_or_404(self.queryset, pk=kwargs.get('pk'))
         serializer = self.serializer_class(course_item, data=request.data, partial=True)
