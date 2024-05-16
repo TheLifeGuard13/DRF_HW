@@ -52,13 +52,13 @@ class Subscription(models.Model):
     Модель Подписки
     """
 
-    course = models.ForeignKey(Course, on_delete=models.SET, **NULLABLE, verbose_name="Курс")
+    course = models.ForeignKey(Course, on_delete=models.SET, **NULLABLE, verbose_name="Курс",
+                               related_name="course_for_subscription")
     subscriber = models.ForeignKey(
-        settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE, **NULLABLE, verbose_name="Подписчик"
-    )
+        settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE, **NULLABLE, verbose_name="Подписчик")
 
     def __str__(self) -> str:
-        return f"{self.course}"
+        return f"{self.course}, {self.subscriber}"
 
     class Meta:
         verbose_name = "подписка"

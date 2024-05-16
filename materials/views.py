@@ -5,7 +5,8 @@ from rest_framework.response import Response
 
 from materials.models import Course, Lesson, Subscription
 from materials.paginators import MaterialPaginator
-from materials.serializers import CourseSerializer, LessonSerializer
+from materials.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer
+from materials.tasks import send_updates
 from users.permissions import IsModerator, IsOwner, IsStaff
 
 
@@ -27,6 +28,17 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action == "destroy":
             self.permission_classes = (~IsModerator | IsOwner | IsStaff,)
         return super().get_permissions()
+
+    # def update(self, request, pk=None, project_pk=None):
+    #     print(request.data['result'])
+
+    def partial_update(self, request, *args, **kwargs):
+        course_item = get_object_or_404(self.queryset, pk=kwargs.get('pk'))
+        serializer = self.serializer_class(course_item, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        send_updates.delay(course_item.id)
+        return Response(serializer.data)
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
@@ -83,3 +95,8 @@ class SubscriptionCreateAPIView(generics.CreateAPIView):
             message = "подписка добавлена"
         # Возвращаем ответ в API
         return Response({"message": message})
+
+
+class SubscriptionListAPIView(generics.ListAPIView):
+    serializer_class = SubscriptionSerializer
+    queryset = Subscription.objects.all()
