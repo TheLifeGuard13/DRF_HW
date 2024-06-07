@@ -19,4 +19,5 @@ class UserSerializer(serializers.ModelSerializer):
             "is_active",
             "email",
             "groups",
+            "password",
         )
