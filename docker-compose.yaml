@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - pg_date:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "-c", "pg_isready -U $POSTGRES_USER"]
       interval: 10s
@@ -61,8 +61,8 @@ services:
       - "8000:8000"
     volumes:
       - .:/drf_app
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000 && python manage.py csu"
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
 
 
 volumes:
-  pg_date:
+  pg_data:
